@@ -1,5 +1,7 @@
 # ggufvis2
 
+![ggufvis2 banner](docs/media/banner.png)
+
 A metadata-driven terminal matrix visualizer for GGUF language models.
 
 The visualizer reads GGUF metadata and tensor descriptors only. It never reads
