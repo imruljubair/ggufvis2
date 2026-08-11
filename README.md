@@ -33,7 +33,22 @@ navigation and the Operation Explainer.
 
 [Download the demo as an MP4](docs/media/ggufvis2-demo.mp4)
 
-## Operation Explainer
+## Model view
+
+Step through the model to highlight each operation, its equation, and the GGUF
+tensor that supplies its parameters.
+
+### TinyLlama attention
+
+```bash
+python3 ggufvis2.py --ollama tinyllama
+```
+
+<p align="center">
+  <img src="docs/images/tinyllama-attention.png" alt="ggufvis visualizing TinyLlama attention RMSNorm" width="420">
+</p>
+
+## Operation Explainer views
 
 Press `Right` on a supported operation to inspect its matrix flow, dimensions,
 selected cells, and equation. Click any preview for the full-resolution view.
@@ -57,20 +72,9 @@ selected cells, and equation. Click any preview for the full-resolution view.
   </tr>
 </table>
 
-## Sample views
+## Other model views
 
-Step through the model to highlight each operation, its equation, and the GGUF
-tensor that supplies its parameters.
-
-### TinyLlama attention
-
-```bash
-python3 ggufvis2.py --ollama tinyllama
-```
-
-<p align="center">
-  <img src="docs/images/tinyllama-attention.png" alt="ggufvis visualizing TinyLlama attention RMSNorm" width="420">
-</p>
+Additional examples across operations, architectures, and input sources.
 
 ### TinyLlama feed-forward network
 
