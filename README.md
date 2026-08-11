@@ -33,6 +33,30 @@ navigation and the Operation Explainer.
 
 [Download the demo as an MP4](docs/media/ggufvis2-demo.mp4)
 
+## Operation Explainer
+
+Press `Right` on a supported operation to inspect its matrix flow, dimensions,
+selected cells, and equation. Click any preview for the full-resolution view.
+
+<table>
+  <tr>
+    <td align="center"><strong>RMSNorm</strong><br><a href="docs/images/rmsnorm.png"><img src="docs/images/rmsnorm.png" alt="RMSNorm Operation Explainer" width="390"></a></td>
+    <td align="center"><strong>K projection</strong><br><a href="docs/images/k_proj.png"><img src="docs/images/k_proj.png" alt="K projection Operation Explainer" width="390"></a></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Rotary position encoding</strong><br><a href="docs/images/rope.png"><img src="docs/images/rope.png" alt="Rotary position encoding Operation Explainer" width="390"></a></td>
+    <td align="center"><strong>Attention scores</strong><br><a href="docs/images/attention.png"><img src="docs/images/attention.png" alt="Attention scores Operation Explainer" width="390"></a></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Causal softmax</strong><br><a href="docs/images/causal.png"><img src="docs/images/causal.png" alt="Causal softmax Operation Explainer" width="390"></a></td>
+    <td align="center"><strong>Head concatenation</strong><br><a href="docs/images/concat.png"><img src="docs/images/concat.png" alt="Head concatenation Operation Explainer" width="390"></a></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Attention residual</strong><br><a href="docs/images/residual.png"><img src="docs/images/residual.png" alt="Attention residual Operation Explainer" width="390"></a></td>
+    <td align="center"><strong>SiLU gated activation</strong><br><a href="docs/images/SiLU.png"><img src="docs/images/SiLU.png" alt="SiLU gated activation Operation Explainer" width="390"></a></td>
+  </tr>
+</table>
+
 ## Sample views
 
 Step through the model to highlight each operation, its equation, and the GGUF
@@ -45,7 +69,7 @@ python3 ggufvis2.py --ollama tinyllama
 ```
 
 <p align="center">
-  <img src="docs/images/tinyllama-attention.png" alt="ggufvis visualizing TinyLlama attention RMSNorm" width="600">
+  <img src="docs/images/tinyllama-attention.png" alt="ggufvis visualizing TinyLlama attention RMSNorm" width="420">
 </p>
 
 ### TinyLlama feed-forward network
@@ -55,7 +79,7 @@ python3 ggufvis2.py --ollama tinyllama
 ```
 
 <p align="center">
-  <img src="docs/images/tinyllama-ffn.png" alt="ggufvis visualizing TinyLlama's MLP gate projection" width="600">
+  <img src="docs/images/tinyllama-ffn.png" alt="ggufvis visualizing TinyLlama's MLP gate projection" width="420">
 </p>
 
 ### Gemma attention
@@ -65,7 +89,7 @@ python3 ggufvis2.py --ollama gemma
 ```
 
 <p align="center">
-  <img src="docs/images/gemma-attention.png" alt="ggufvis visualizing Gemma's attention K projection" width="600">
+  <img src="docs/images/gemma-attention.png" alt="ggufvis visualizing Gemma's attention K projection" width="420">
 </p>
 
 ### Remote GGUF
@@ -75,7 +99,7 @@ python3 ggufvis2.py --url "https://huggingface.co/ggml-org/models-moved/blob/mai
 ```
 
 <p align="center">
-  <img src="docs/images/remote-gguf.png" alt="ggufvis visualizing a GGUF directly from a Hugging Face URL" width="600">
+  <img src="docs/images/remote-gguf.png" alt="ggufvis visualizing a GGUF directly from a Hugging Face URL" width="420">
 </p>
 
 ## Run
