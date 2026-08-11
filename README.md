@@ -44,7 +44,9 @@ tensor that supplies its parameters.
 python3 ggufvis2.py --ollama tinyllama
 ```
 
-![ggufvis visualizing TinyLlama attention RMSNorm](docs/images/tinyllama-attention.png)
+<p align="center">
+  <img src="docs/images/tinyllama-attention.png" alt="ggufvis visualizing TinyLlama attention RMSNorm" width="600">
+</p>
 
 ### TinyLlama feed-forward network
 
@@ -52,7 +54,9 @@ python3 ggufvis2.py --ollama tinyllama
 python3 ggufvis2.py --ollama tinyllama
 ```
 
-![ggufvis visualizing TinyLlama's MLP gate projection](docs/images/tinyllama-ffn.png)
+<p align="center">
+  <img src="docs/images/tinyllama-ffn.png" alt="ggufvis visualizing TinyLlama's MLP gate projection" width="600">
+</p>
 
 ### Gemma attention
 
@@ -60,7 +64,9 @@ python3 ggufvis2.py --ollama tinyllama
 python3 ggufvis2.py --ollama gemma
 ```
 
-![ggufvis visualizing Gemma's attention K projection](docs/images/gemma-attention.png)
+<p align="center">
+  <img src="docs/images/gemma-attention.png" alt="ggufvis visualizing Gemma's attention K projection" width="600">
+</p>
 
 ### Remote GGUF
 
@@ -68,7 +74,9 @@ python3 ggufvis2.py --ollama gemma
 python3 ggufvis2.py --url "https://huggingface.co/ggml-org/models-moved/blob/main/tinyllamas/stories15M-q4_0.gguf"
 ```
 
-![ggufvis visualizing a GGUF directly from a Hugging Face URL](docs/images/remote-gguf.png)
+<p align="center">
+  <img src="docs/images/remote-gguf.png" alt="ggufvis visualizing a GGUF directly from a Hugging Face URL" width="600">
+</p>
 
 ## Run
 
