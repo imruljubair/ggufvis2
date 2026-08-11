@@ -24,11 +24,12 @@ weights into memory.
 
 ## Demo
 
-[Watch the full ggufvis2 demo (MP4)](docs/media/ggufvis2-demo.mp4)
+[![Watch the ggufvis2 demo on YouTube](https://img.youtube.com/vi/6VitPJzfYKs/maxresdefault.jpg)](https://youtu.be/6VitPJzfYKs)
 
-The demo shows interactive model navigation and the Operation Explainer. GitHub
-may open the recording in its file viewer; if playback does not start in your
-browser, use the download button and play it locally.
+Click the preview to watch the full demo on YouTube. It shows interactive model
+navigation and the Operation Explainer.
+
+[Download the demo as an MP4](docs/media/ggufvis2-demo.mp4)
 
 ## Sample views
 
