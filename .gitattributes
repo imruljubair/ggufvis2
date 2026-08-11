@@ -1,0 +1,5 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Keep demo recordings binary and avoid line-ending or diff processing.
+*.mp4 binary
