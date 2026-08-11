@@ -181,7 +181,7 @@ def tensor_source_for(diagram: Diagram, result: str) -> str:
         "x_out": "none (parameter-free)",
         "z": "output_norm.weight",
         "logits": (
-            "token_embd.weight (transposed, tied)"
+            "token_embd.weight (tied)"
             if config.output_is_tied
             else "output.weight"
         ),

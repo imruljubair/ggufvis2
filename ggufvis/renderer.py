@@ -46,9 +46,17 @@ CARD_BACKGROUND = (30, 27, 34)
 CARD_BORDER = (235, 70, 205)
 CARD_LABEL = (190, 155, 205)
 CARD_TEXT = (235, 235, 235)
-CARD_HEIGHT = 6
 COMPACT_CARD_TEXT = (88, 88, 88)
 COMPACT_CARD_HEIGHT = 1
+
+
+def _card_height(diagram: Diagram, step: int) -> int:
+    """Fit the card tightly around its physical content lines."""
+    _, operation, equation, source = card_lines(diagram, step)
+    content_line_count = sum(
+        len(line.splitlines()) for line in (operation, equation, source)
+    )
+    return content_line_count + 2
 
 
 def _inactive_fill(
@@ -447,20 +455,21 @@ def _draw_card(
         for physical_line in line.splitlines()
     )
     width = maximum_card_width(diagram)
+    height = _card_height(diagram, step)
     y = (
         max(
             0,
             min(
                 diagram.operations[step].row - 1,
-                canvas.height - CARD_HEIGHT,
+                canvas.height - height,
             ),
         )
         if card_y is None
         else card_y
     )
-    canvas.fill_rect(annotation_x, y, width, CARD_HEIGHT, CARD_BACKGROUND)
+    canvas.fill_rect(annotation_x, y, width, height, CARD_BACKGROUND)
     canvas.fancy_box(
-        annotation_x, y, width, CARD_HEIGHT, "single", CARD_BORDER
+        annotation_x, y, width, height, "single", CARD_BORDER
     )
     put(
         canvas,
@@ -546,7 +555,9 @@ def render_diagram(
         canvas_height = diagram.panels.canvas_height
     else:
         canvas_width = max(diagram.block_width, card_width)
-        canvas_height = diagram.panels.canvas_height + 1 + CARD_HEIGHT
+        canvas_height = (
+            diagram.panels.canvas_height + 1 + _card_height(diagram, step)
+        )
     canvas = Canvas(canvas_width, canvas_height)
     panels = diagram.panels
     config = diagram.config

@@ -1345,7 +1345,7 @@ class FinalV1Tests(unittest.TestCase):
         self.assertEqual(diagram.matrix("wlm").label, "Eᵀ")
         self.assertEqual(
             lines[3],
-            "Source: token_embd.weight (transposed, tied)",
+            "Source: token_embd.weight (tied)",
         )
 
     def test_remote_reader_uses_ranges_without_saving_the_model(self) -> None:
@@ -1378,6 +1378,34 @@ class FinalV1Tests(unittest.TestCase):
         self.assertGreater(below.height, beside.height)
         self.assertIn("[01/24] EMBEDDING", below_text)
         self.assertIn("Source: token_embd.weight", below_text)
+
+    def test_annotation_height_grows_with_wrapped_text(self) -> None:
+        diagram = build_diagram(config_from_gguf(_qwen3_model()))
+        result_keys = [operation.result for operation in diagram.operations]
+        single_line_step = result_keys.index("x_norm")
+        two_line_step = result_keys.index("x")
+
+        single_line = render_diagram(
+            diagram, single_line_step, annotation_position="below"
+        )
+        two_lines = render_diagram(
+            diagram, two_line_step, annotation_position="below"
+        )
+
+        self.assertEqual(two_lines.height, single_line.height + 1)
+        card_start = diagram.panels.canvas_height + 1
+        single_card = single_line.render(use_color=False).splitlines()[card_start:]
+        two_line_card = two_lines.render(use_color=False).splitlines()[card_start:]
+        self.assertEqual(len(single_card), 5)
+        self.assertEqual(len(two_line_card), 6)
+        self.assertIn("Source:", single_card[-2])
+        self.assertIn("Source:", two_line_card[-2])
+        self.assertTrue(single_card[-1].startswith("└"))
+        self.assertTrue(two_line_card[-1].startswith("└"))
+        self.assertIn(
+            "otherwise output of block b−1",
+            two_lines.render(use_color=False),
+        )
 
     def test_unselected_operations_have_low_contrast_compact_annotations(self) -> None:
         diagram = build_diagram(config_from_gguf(_qwen3_model()))
