@@ -29,7 +29,11 @@ from .terminal import read_key
 # Optional Model View selection delay, currently disabled:
 # LAYER_SELECTION_DELAY_SECONDS = 0.035
 
-VIEW_LABEL_COLOR = (125, 125, 125)
+VIEW_LABEL_TEXT = (255, 255, 255)
+VIEW_LABEL_BACKGROUNDS = {
+    "model view": (30, 95, 155),
+    "explainer view": (45, 125, 75),
+}
 
 
 def parser() -> argparse.ArgumentParser:
@@ -125,21 +129,29 @@ def _view_header(
     width: int,
     use_color: bool,
 ) -> str:
-    """Append a persistent, low-contrast view label to the source header."""
+    """Append a persistent, color-coded view label to the source header."""
     suffix = f" [{view}]"
     if width <= len(suffix):
         visible = _fit_header(suffix.strip(), width)
         prefix = ""
+        separator = ""
         label = visible
     else:
         prefix = _fit_header(source_header, width - len(suffix))
-        label = suffix
-        visible = f"{prefix}{label}"
+        separator = " "
+        label = f"[{view}]"
+        visible = f"{prefix}{separator}{label}"
     if not use_color:
         return visible
-    red, green, blue = VIEW_LABEL_COLOR
+    text_red, text_green, text_blue = VIEW_LABEL_TEXT
+    background_red, background_green, background_blue = (
+        VIEW_LABEL_BACKGROUNDS[view]
+    )
     return (
-        f"{prefix}\033[38;2;{red};{green};{blue}m"
+        f"{prefix}{separator}"
+        f"\033[38;2;{text_red};{text_green};{text_blue}m"
+        f"\033[48;2;{background_red};{background_green};"
+        f"{background_blue}m"
         f"{label}\033[0m"
     )
 

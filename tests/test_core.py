@@ -19,6 +19,7 @@ from ggufvis.cli import (
     _detail_viewport,
     _fit_header,
     _source_header,
+    _view_header,
     _viewport,
 )
 from ggufvis.annotations import card_lines, maximum_card_width
@@ -1469,6 +1470,24 @@ class FinalV1Tests(unittest.TestCase):
         self.assertEqual(len(fitted), 30)
         self.assertIn("…", fitted)
         self.assertTrue(fitted.endswith("Q4_K_M.gguf"))
+
+    def test_view_badges_use_distinct_background_colors(self) -> None:
+        model = _view_header("GGUF: model.gguf", "model view", 80, True)
+        explainer = _view_header(
+            "GGUF: model.gguf", "explainer view", 80, True
+        )
+
+        self.assertIn("\033[38;2;255;255;255m", model)
+        self.assertIn(" \033[38;2;255;255;255m", model)
+        self.assertIn("\033[48;2;30;95;155m[model view]", model)
+        self.assertNotIn("\033[48;2;30;95;155m [model view]", model)
+        self.assertIn("\033[38;2;255;255;255m", explainer)
+        self.assertIn(
+            "\033[48;2;45;125;75m[explainer view]", explainer
+        )
+        self.assertNotIn(
+            "\033[48;2;45;125;75m [explainer view]", explainer
+        )
 
     def test_mha_and_mqa_have_clean_non_nested_labels(self) -> None:
         base = config_from_gguf(_qwen3_model())
