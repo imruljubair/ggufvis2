@@ -448,14 +448,21 @@ class FinalV1Tests(unittest.TestCase):
         diagram = build_diagram(config_from_gguf(_qwen3_model()))
         canvas = render_diagram(diagram, 0)
 
+        self.assertEqual(ACTIVE_LEARNED_BORDER_MARKER, "<>")
+        self.assertEqual(INACTIVE_LEARNED_BORDER_MARKER, "<>")
+
         for matrix in diagram.matrices:
             width = diagram.width_for(matrix.columns)
             height = diagram.height_for(matrix.rows)
-            marker = canvas.pixels[matrix.y + height - 1][
-                matrix.x + width - 2
-            ]
-            marker_color = canvas.colors[matrix.y + height - 1][
-                matrix.x + width - 2
+            marker_width = len(ACTIVE_LEARNED_BORDER_MARKER)
+            marker_start = matrix.x + width - 1 - marker_width
+            marker = "".join(
+                canvas.pixels[matrix.y + height - 1][
+                    marker_start : marker_start + marker_width
+                ]
+            )
+            marker_colors = canvas.colors[matrix.y + height - 1][
+                marker_start : marker_start + marker_width
             ]
             with self.subTest(matrix=matrix.key):
                 if matrix.key in LEARNED_WEIGHTS:
@@ -471,7 +478,9 @@ class FinalV1Tests(unittest.TestCase):
                         in diagram.operations[0].matrices
                         else INACTIVE_BORDER
                     )
-                    self.assertEqual(marker_color, expected_color)
+                    self.assertTrue(
+                        all(color == expected_color for color in marker_colors)
+                    )
                 else:
                     self.assertNotIn(
                         marker,
